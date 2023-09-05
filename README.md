@@ -20,7 +20,7 @@ Ta có 1 mảng `arr[] = [87, 90, 85, 88, 86, 84, 92, 91]`.
 
 1. Selection Sort
 
- Ý tưởng của `Selection Sort` đó là lần lượt lựa chọn các phần tử trong mảng, bắt đầu từ vị trí đầu tiên là 87, sau đó so sánh với phần tử tiếp thức, nếu phần tử nào có giá trị bé hơn sẽ đổi chỗ, output 1 phần các bước như sau:
+Ý tưởng của `Selection Sort` đó là lần lượt lựa chọn các phần tử trong mảng, bắt đầu từ vị trí đầu tiên là 87, sau đó so sánh với phần tử tiếp thức, nếu phần tử nào có giá trị bé hơn sẽ đổi chỗ, output 1 phần các bước như sau:
 - [`85`, 90, `87`, 88, 86, 84, 92, 91]: bắt đầu từ index = 0. Đổi 85 và 87
 - [`84`, 90, 87, 88, 86, `85`, 92, 91]:  Đổi 85 và 84. Sau khi lần lựa chọn index = 0 đầu tiên, ta đã lấy ra được phần tử bé nhất và cho swab lên đầu. Ta cũng có thể ứng dụng bài toán này cho lựa chọn phần tử bé nhất.
 - [84, `87`, `90`, 88, 86, 85, 92, 91]: Sau khi hết 1 vòng, tiếp tục từ index = 1. Đổi chỗ 90 và 87
@@ -43,6 +43,89 @@ func selectionSort() {
 ```
 
 Ta có số lần chạy là: N * (N - i) = N ^ 2 - Ni. Nên với `Selection Sort` có độ phức tạp là `O(n^2)`.
+
+2. BubbleSort Thuật toán nổi bọt 
+
+Ý tưởng của `Buble Sort` là so sánh phần tử hiện tại với phần tử đứng sau nó, nếu phần tử hiện tại lớn hơn phần tử hiện tại sẽ swap 2 phần tử đó. Điều này sẽ đẩy được phần tử lớn nhất ra cuối mảng.
+
+```swift
+func bubbleSort() {
+
+    for key in 0 ..< arr.count {
+        for i in 0 ..< arr.count - key - 1 {
+            if arr[i] > arr[i+1] {
+                let temp = arr[i]
+                arr[i] = arr[i+1]
+                arr[i+1] = temp
+            }
+        }
+    }
+    
+    printArr()
+}
+```
+
+3. Insertion Sort Thuật toán sắp xếp chèn
+
+Ý tưởng của `Insertion Sort` là chèn số sau vào dáy số đã được sắp xếp đằng trước.
+
+
+Ta có mảng `arr[] = [87, 90, 85, 88, 86, 84, 92, 91]`. Thứ tự mảng đổi chỗ như sau:
+- 85, 87, 90, 88, 86, 84, 92, 91
+- 85, 87, 88, 90, 86, 84, 92, 91
+- ....
+
+```swift
+func insertSort() {
+
+    for key in 1 ..< arr.count {
+        
+        let currentValue = arr[key]
+        var pop = key - 1
+        
+        while pop >= 0 && arr[pop] > currentValue {
+            arr[pop + 1] = arr[pop]
+            pop = pop - 1
+        }
+        
+        arr[pop + 1] = currentValue
+        
+    }
+    
+    printArr()
+}
+```
+
+4. Counting Sort - Thuật toán đếm phân phối
+
+Ý tưởng của `Coungting Sort` là đếm số phân tử giống nhau xuất hiện trong mảng bằng cách sử dụng 1 mảng để key và value
+
+VD: var arr = [10, 15, 10, 4, 4, 20, 9, 25, 54, 4 ,10, 54, 9]
+Ta đếm thấy: 10 xuất hiện 3 lần, 15 xuất hiện 1 lần, 4 xuất hiện 3 lần,.. Lúc này mảng sẽ kiểu `lookup[10] = 3, lookup[15] = 1, lookup[4] = 3,...`
+
+Chú ý: Vì mảng được khởi tạo có max size, thường là 1 mảng có tối đa 10^7(nếu khai báo mảng có size > 10 ^ 7 có thể gây ra tràn stack), nên cách giải này có 1 hạn chế là max value của mảng ko thể có giá trị > 10^7, và mảng phải có giá trị luôn dương vì đâu thể có key âm như `10[-5]` 
+
+```swift
+ func countingSort() {
+    var tempArr = Array(repeating: 0, count: 1000001)
+
+    guard let max = countArr.max() else {return}
+
+    
+    countArr.forEach { value in
+        tempArr[value] += 1
+    }
+    
+
+    for i in 0 ... max {
+        if tempArr[i] != 0 {
+            for _ in 0 ..< tempArr[i] {
+                print("DEBUG: \(i)")
+            }
+        }
+    }
+}
+```
 
 # II. Search
 
