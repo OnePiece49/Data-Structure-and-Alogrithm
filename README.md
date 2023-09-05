@@ -16,9 +16,11 @@ Ta thấy `O(n)` cũng tương tự như 1 hàm số `f(x)` nên `O(n) = an + b`
 
 ## I. Sort
 
+Ta có 1 mảng `arr[] = [87, 90, 85, 88, 86, 84, 92, 91]`.
+
 1. Selection Sort
 
-Ta có 1 mảng `arr[] = [87, 90, 85, 88, 86, 84, 92, 91]`. Ý tưởng của `Selection Sort` đó là lần lượt lựa chọn các phần tử trong mảng, bắt đầu từ vị trí đầu tiên là 87, sau đó so sánh với phần tử tiếp thức, nếu phần tử nào có giá trị bé hơn sẽ đổi chỗ, output 1 phần các bước như sau:
+ Ý tưởng của `Selection Sort` đó là lần lượt lựa chọn các phần tử trong mảng, bắt đầu từ vị trí đầu tiên là 87, sau đó so sánh với phần tử tiếp thức, nếu phần tử nào có giá trị bé hơn sẽ đổi chỗ, output 1 phần các bước như sau:
 - [`85`, 90, `87`, 88, 86, 84, 92, 91]: bắt đầu từ index = 0. Đổi 85 và 87
 - [`84`, 90, 87, 88, 86, `85`, 92, 91]:  Đổi 85 và 84. Sau khi lần lựa chọn index = 0 đầu tiên, ta đã lấy ra được phần tử bé nhất và cho swab lên đầu. Ta cũng có thể ứng dụng bài toán này cho lựa chọn phần tử bé nhất.
 - [84, `87`, `90`, 88, 86, 85, 92, 91]: Sau khi hết 1 vòng, tiếp tục từ index = 1. Đổi chỗ 90 và 87
@@ -45,4 +47,9 @@ Ta có số lần chạy là: N * (N - i) = N ^ 2 - Ni. Nên với `Selection So
 # II. Search
 
 <a name="Logarit"></a>
-Ở đây ta muốn tìm 1 vị trí có giá trị bằng 85 trong mảng arr[] = [87, 90, 85, 88, 86, 84, 92, 91]
+
+2. Binary Search
+
+Ta có 1 mảng `arr[] = [87, 90, 85, 88, 86, 84, 92, 91]`.
+
+Ở đây ta muốn tìm 1 vị trí có giá trị bằng `85` trong mảng `arr[]`
