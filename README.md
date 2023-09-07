@@ -135,4 +135,31 @@ Chú ý: Vì mảng được khởi tạo có max size, thường là 1 mảng c
 
 Ta có 1 mảng `arr[] = [87, 90, 85, 88, 86, 84, 92, 91]`.
 
-Ở đây ta muốn tìm 1 vị trí có giá trị bằng `85` trong mảng `arr[]`
+Ở đây ta muốn tìm 1 vị trí có giá trị bằng `85` trong mảng `arr[]`, trước tiên mảng `arr` cần được sắp xếp trước, sau đó ta sẽ lấy ra phần tử `center`, nếu `center` bằng phần tử cần tìm thì return phần tử đó luôn, ko thì so sánh phần tử `center` với giá trị cần tìm, nếu lớn hơn `center` thì lấy nửa phải, ko thì lấy nửa trái.
+
+```swift
+func binarySearch(_ arr: [Int], _ l: Int, _ r: Int, _ x: Int) {
+    var left = l
+    var right = r
+    
+    while (left <= right) {
+        let centerX = left + (right - left) / 2
+        let centerValue = arr[centerX]
+        
+        if centerValue == x {
+            print("Pos: \(centerX)")
+            return 
+        }
+        
+        if centerValue > x {
+            right = centerX - 1
+        }
+        
+        if centerValue < x {
+            left = centerX + 1
+        }
+    }
+    
+    print("Pos: -1")
+}
+```

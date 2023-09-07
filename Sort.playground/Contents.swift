@@ -115,12 +115,126 @@ class Sort {
         if right > _left {
             quickSort(&arr, _left, right)
         }
+    }
+    
+    
+    func binarySearchC1(_ array: [Int] , _ n: Int) {
+        let centerX = array.count / 2
+        let centerValue = array[centerX]
         
+        print("\(centerValue)")
+        if centerValue == n {
+            print("Position: \(centerX)")
+            return
+        }
         
+        if array.count <= 1 {
+            print("Position: -1")
+            return
+        }
+        
+        if centerValue < n {
+            
+            binarySearchC1(array.suffix(array.count - centerX), n)
+        } 
+        
+        if centerValue > n {
+            binarySearchC1( Array(array.prefix(centerX)), n)
+        }
+    }
+    
+    func binarySearch(_ arr: [Int], _ l: Int, _ r: Int, _ x: Int) {
+        var left = l
+        var right = r
+        
+        while (left <= right) {
+            let centerX = left + (right - left) / 2
+            let centerValue = arr[centerX]
+            
+            if centerValue == x {
+                print("Pos: \(centerX)")
+                return 
+            }
+            
+            if centerValue > x {
+                right = centerX - 1
+            }
+            
+            if centerValue < x {
+                left = centerX + 1
+            }
+        }
+        
+        print("Pos: -1")   
+    }
 
+    private func sinh_HV(_ arr: inout [Int]) -> Bool {
+        
+        var pos = arr.count - 1
+        
+        while arr[pos] < arr[pos - 1] && pos >= 0 {
+            pos -= 1
+        }
+        
+        for i in stride(from: arr.count - 1, to: pos - 1, by: -1) {
+            if arr[pos - 1] < arr[i] {
+                let temp = arr[pos - 1]
+                arr[pos - 1] = arr[i]
+                arr[i] = temp  
+                break
+            }        
+        }       
+
+        var l = pos
+        var r = arr.count - 1
+        
+        while l <= r {
+            let temp = arr[l]
+            arr[l] = arr[r]
+            arr[r] = temp
+            l += 1
+            r -= 1
+        }
+        
+        for i in 0 ..< arr.count {
+            if arr[i] != arr.count - i {return false}
+        }
+        
+        return true
+        
+    }
+    
+    func sinh_hoan_vi(_ n: Int) {
+        
+        var arr = Array(repeating: 0, count: n)
+        var isFinal = false
+        
+        for i in 0 ..< n {
+            arr[i] = i + 1
+        }
+        
+        while !isFinal {
+            arr.forEach { value in
+                print("\(value)", terminator: "")
+            }
+            
+            print(",")
+            
+            isFinal = sinh_HV(&arr)
+            
+            if isFinal {
+                arr.forEach { value in
+                    print("\(value)", terminator: "")
+                }                
+            }
+        }
+        
     }
 }
 
 let sort = Sort()
 sort.quickSort(&sort.arr, 0, sort.arr.count - 1)
-sort.printArr()
+
+// sort.binarySearchC1(sort.arr, 85)
+sort.binarySearch(sort.arr, 0, 8, 90)
+sort.sinh_hoan_vi(6)
